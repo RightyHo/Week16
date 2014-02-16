@@ -1,3 +1,6 @@
+/*  1. ls - Write a program that shows on screen the names of the files in the current directory. (Hint: look at methods from class File).
+*/
+
 import java.io.File;
 import java.io.Reader;
 import java.io.BufferedReader;
@@ -14,31 +17,24 @@ public class FileNames{
 		readFileNames();
 	}
 	public void readFileNames(){
-		String fileName = "./Programming in Java/Week16";
+		String fileName = "/Users/andrewho/Documents/Programming/Week16/";
 		File file = new File(fileName);
-		BufferedReader in = null;
+        if(file.exists()){
+            System.out.println("This file does exist according to this method call");
+        }
+        if(file.isDirectory()){
+            System.out.println("This file is a directory");
+        }
+//		BufferedReader in = null;
 		try {
-			in = new BufferedReader(new FileReader(file));
-			File fileArray[] = file.listFiles();
-			for(int i=0;i<fileArray.length;i++){
-				String str = fileArray[i].getAbsolutePath();
-				System.out.println(str);
+//			in = new BufferedReader(new FileReader(file));
+			String[] fileArray = file.list();
+            for(int i=0;i<fileArray.length;i++){
+                String str = fileArray[i];
+                System.out.println(str);
 			}
-		} catch (FileNotFoundException ex) {
-			System.out.println("File " + file + " does not exist.");
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			closeReader(in);
+		} catch (SecurityException  ex) {
+			System.out.println("Encountered problems listing files in directory: " + file);
 		}
-	}
-	private void closeReader(Reader reader) {
-		try {
-			if (reader != null) {
-				reader.close();
-			}
-		} catch (IOException ex){
-			ex.printStackTrace();
-		}
-	}
+    }
 }
