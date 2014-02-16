@@ -25,9 +25,7 @@ public class FileNames{
         if(file.isDirectory()){
             System.out.println("This file is a directory");
         }
-//		BufferedReader in = null;
 		try {
-//			in = new BufferedReader(new FileReader(file));
 			String[] fileArray = file.list();
             for(int i=0;i<fileArray.length;i++){
                 String str = fileArray[i];
